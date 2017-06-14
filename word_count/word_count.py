@@ -1,0 +1,2 @@
+def words(statement):
+        pass
