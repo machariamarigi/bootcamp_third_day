@@ -16,7 +16,7 @@ class HttpWebClient(unittest.TestCase):
             'http://api.odsrmap.org/data/2.5/forecast/daily?q=Nairobi&APPID=9e68c31e59d752247d58d439c50aaaff')
         self.assertDictEqual(
             result,
-            {'Error': '<urlopen error [Errno 11001] getaddrinfo failed>'},
+            {'Error': '<urlopen error [Errno -2] Name or service not known>'},
             "Not working")
 
 if __name__ == '__main__':
