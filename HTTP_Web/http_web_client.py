@@ -17,4 +17,17 @@ def http_web_client(url):
         return {"Error": str(error)}
 
     else:
-        return result['city']['country']
+        if result['city']['country']:
+            return result['city']['country']
+        else:
+            return result
+
+
+def request_url():
+    """
+        Function to prompt user enter an url of a public ApI
+    """
+    input_url = input('Please enter a public API url: ')
+    print(http_web_client(input_url))
+
+request_url()
