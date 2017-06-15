@@ -1,33 +1,42 @@
-from urllib.request import urlopen, Request, URLError
+import requests
 import json
 
 
-def http_web_client(url):
+def http_web_client(user):
     """
         Client that consumes a public web API
     """
 
-    request = Request(url)
+    profile = requests.get('https://api.github.com/users/' + user)
 
-    try:
-        response = urlopen(request)
-        result = json.loads(response.read().decode('utf-8'))
-
-    except URLError as error:
-        return {"Error": str(error)}
-
+    if profile.ok:
+        data = profile.json()
+        return data
     else:
-        if result['city']['country']:
-            return result['city']['country']
+        return None
+
+
+def request_user():
+    """
+        Function to prompt user to enter their github username and outputs
+        their github fullname, link to their page and bio
+    """
+    username = raw_input('Please enter a valid github username: ')
+
+    if isinstance(username, str):
+        user_profile = http_web_client(username)
+        if user_profile == None:
+            print('That was not a correct username')
+            request_user()
         else:
-            return result
+            github_name = user_profile['name']
+            github_link = user_profile['html_url']
+            github_bio = user_profile['bio']
+            print('User is {}'.format(github_name))
+            print('Bio:'.format(github_bio))
+            print('Profile page => {}'.format(github_link))
+            print('Bye')
+    else:
+        raise ValueError('Input is not a valid string')
 
-
-def request_url():
-    """
-        Function to prompt user enter an url of a public ApI
-    """
-    input_url = input('Please enter a public API url: ')
-    print(http_web_client(input_url))
-
-request_url()
+request_user()
