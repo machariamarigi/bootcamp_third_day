@@ -12,13 +12,5 @@ class HttpWebClient(unittest.TestCase):
         self.assertIsNotNone(response)
 
 
-class GetUserTest(unittest.TestCase):
-    """Class to test the get_user method"""
-
-    def test_if_input_is_string(self):
-        with self.assertRaises(ValueError):
-            request_user()
-
-
 if __name__ == '__main__':
     unittest.main()
