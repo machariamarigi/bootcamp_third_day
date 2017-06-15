@@ -1,6 +1,6 @@
 import unittest
 
-from http_web_client import http_web_client
+from http_web_client import http_web_client, request_user
 
 
 class HttpWebClient(unittest.TestCase):
@@ -14,7 +14,10 @@ class HttpWebClient(unittest.TestCase):
 
 class GetUserTest(unittest.TestCase):
     """Class to test the get_user method"""
-    pass
+
+    def test_if_input_is_string(self):
+        with self.assertRaises(ValueError):
+            request_user()
 
 
 if __name__ == '__main__':

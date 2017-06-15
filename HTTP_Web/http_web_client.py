@@ -2,18 +2,23 @@ import requests
 import json
 
 
-def http_web_client(url):
+def http_web_client(user):
     """
         Client that consumes a public web API
     """
 
+    profile = requests.get('https://api.github.com/users/' + user)
+
+    if profile.ok:
+        data = profile.json()
+        return data
+    else:
+        return None
 
 
-# def request_url():
-#     """
-#         Function to prompt user enter an url of a public ApI
-#     """
-#     input_url = input('Please enter a public API url: ')
-#     print(http_web_client(input_url))
+def request_user():
+    """
+        Function to prompt user to enter their github usernae
+    """
+    pass
 
-# request_url()
